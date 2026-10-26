@@ -37,7 +37,7 @@
     <div class="card card-panes">
       <div>
         <h2>Capítulo IV: El Pago de los Panes</h2>
-        <p>Calcula el reparto matemático exacto según los tercios consumidos por el Vizconde.</p>
+        <p>Calcula el reparto matemático según los panes aportados y las monedas entregadas por el Vizconde.</p>
         
         <form onsubmit="return false;">
           <label for="panesBeremiz">Panes de Beremiz:</label>
@@ -45,6 +45,9 @@
 
           <label for="panesHank">Panes de Hank:</label>
           <input type="number" id="panesHank" value="3">
+
+          <label for="monedasVizconde">Monedas del Vizconde:</label>
+          <input type="number" id="monedasVizconde" value="8">
           
           <button type="button" onclick="calcularPagoPanes()">Calcular Monedas</button>
         </form>
@@ -74,16 +77,21 @@
       </div>
     </div>
 
-    <!-- Ejercicio 4: Estimación de Pi -->
+    <!-- Ejercicio 4: Estimación de Pi (MODIFICADO PARA CUALQUIER CIFRA) -->
     <div class="card card-pi">
       <div>
         <h2>Estimación de Pi (&pi;)</h2>
-        <p>Calcula la aproximación usando bucles para n = 100, 10000 y 1000000.</p>
-        <button onclick="calcularPi()">Ejecutar Estimación</button>
+        <p>Calcula la aproximación usando bucles para cualquier valor de n.</p>
+        
+        <form onsubmit="return false;">
+          <label for="inputNPi">Valor de n:</label>
+          <input type="number" id="inputNPi" value="10000">
+          <button type="button" onclick="calcularPi()">Ejecutar Estimación</button>
+        </form>
       </div>
 
       <div class="resultado" id="resultadoPi">
-        Haz clic en ejecutar...
+        Ingresa un valor para n y haz clic en ejecutar.
       </div>
     </div>
 

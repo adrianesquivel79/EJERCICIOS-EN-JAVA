@@ -21,21 +21,27 @@ function calcularRepartoCamellos() {
 
 // 2. Ejercicio Panes
 function calcularPagoPanes() {
-  var pBeremiz = parseInt(document.getElementById("panesBeremiz").value);
-  var pHank = parseInt(document.getElementById("panesHank").value);
+  var pBeremiz = parseInt(document.getElementById("panesBeremiz").value) || 0;
+  var pHank = parseInt(document.getElementById("panesHank").value) || 0;
+  var totalMonedas = parseFloat(document.getElementById("monedasVizconde").value) || 0;
 
   var totalPanes = pBeremiz + pHank;
   var totalTercios = totalPanes * 3;
   var porcionPorPersona = totalTercios / 3;
 
-  var aporteBeremiz = (pBeremiz * 3) - porcionPorPersona;
-  var aporteHank = (pHank * 3) - porcionPorPersona;
+  var aporteBeremizTercios = (pBeremiz * 3) - porcionPorPersona;
+  var aporteHankTercios = (pHank * 3) - porcionPorPersona;
 
-  var resultadoHTML = "<strong>Distribución y pago:</strong><br>" +
+  var valorPorTercio = totalMonedas / totalTercios;
+
+  var pagoBeremiz = aporteBeremizTercios * valorPorTercio;
+  var pagoHank = aporteHankTercios * valorPorTercio;
+
+  var resultadoHTML = "<strong>Distribución y pago (" + totalMonedas + " monedas):</strong><br>" +
     "• Total panes: " + totalPanes + " (" + totalTercios + " tercios)<br>" +
-    "• Cada uno comió: " + porcionPorPersona.toFixed(1) + " tercios<br>" +
-    "• Beremiz aporta: <strong>" + aporteBeremiz + " monedas</strong><br>" +
-    "• Hank aporta: <strong>" + aporteHank + " monedas</strong>";
+    "• Consumo por persona: " + porcionPorPersona.toFixed(1) + " tercios<br>" +
+    "• Beremiz aporta: <strong>" + pagoBeremiz.toFixed(2) + " monedas</strong><br>" +
+    "• Hank aporta: <strong>" + pagoHank.toFixed(2) + " monedas</strong>";
 
   document.getElementById("salidaPanes").innerHTML = resultadoHTML;
 }
@@ -63,23 +69,25 @@ function resolverCuadratica() {
   document.getElementById('resultadoCuadratica').innerText = textoResultado;
 }
 
-// 4. Ejercicio Pi
+// 4. Ejercicio Pi (Actualizado para cualquier valor de n ingresado)
 function calcularPi() {
-  let nValues = [100, 10000, 1000000];
-  let textoResultado = "";
+  let n = parseInt(document.getElementById("inputNPi").value);
 
-  for (let i = 0; i < nValues.length; i++) {
-    let n = nValues[i];
-    let suma = 0;
-
-    for (let k = 1; k <= n; k++) {
-      suma += 1 / (k ** 2);
-    }
-
-    let piEst = Math.sqrt(6 * suma);
-    textoResultado += "n = " + n + " → " + piEst.toFixed(10) + "\n";
+  if (isNaN(n) || n <= 0) {
+    document.getElementById('resultadoPi').innerText = "Por favor, ingresa un número válido mayor a 0.";
+    return;
   }
 
-  textoResultado += "\nMath.PI real = " + Math.PI.toFixed(10);
+  let suma = 0;
+  for (let k = 1; k <= n; k++) {
+    suma += 1 / (k ** 2);
+  }
+
+  let piEst = Math.sqrt(6 * suma);
+  
+  let textoResultado = "Para n = " + n + ":\n" +
+    "• Pi estimado = " + piEst.toFixed(15) + "\n" +
+    "• Math.PI real = " + Math.PI.toFixed(15);
+
   document.getElementById('resultadoPi').innerText = textoResultado;
 }
