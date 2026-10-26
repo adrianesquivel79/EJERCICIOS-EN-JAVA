@@ -1,0 +1,121 @@
+:root {
+  --bg-color: #f4f6f8;
+  --card-bg: #ffffff;
+  --text-main: #2b2b2b;
+  --accent-1: #b87333; /* Cobre / Camellos */
+  --accent-2: #319795; /* Turquesa / Panes */
+  --accent-3: #007BFF; /* Azul / Cuadrática */
+  --accent-4: #28a745; /* Verde / Pi */
+  --border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: #1a202c;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #4a5568;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #4a5568;
+}
+
+/* Estilos específicos por tarjeta */
+.card-camellos h2 { color: var(--accent-1); }
+.card-camellos button { background-color: var(--accent-1); }
+.card-camellos button:hover { background-color: #995c27; }
+.card-camellos .resultado { background-color: #fefae0; border-left: 5px solid var(--accent-1); }
+
+.card-panes h2 { color: var(--accent-2); }
+.card-panes button { background-color: var(--accent-2); }
+.card-panes button:hover { background-color: #2c7a7b; }
+.card-panes .resultado { background-color: #e6fffa; border-left: 5px solid var(--accent-2); }
+
+.card-cuadratica h2 { color: var(--accent-3); }
+.card-cuadratica button { background-color: var(--accent-3); }
+.card-cuadratica button:hover { background-color: #0056b3; }
+.card-cuadratica .resultado { background-color: #eef2f7; border-left: 5px solid var(--accent-3); }
+
+.card-pi h2 { color: var(--accent-4); }
+.card-pi button { background-color: var(--accent-4); }
+.card-pi button:hover { background-color: #218838; }
+.card-pi .resultado { background-color: #f0fff4; border-left: 5px solid var(--accent-4); }
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #2d3748;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resultado {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
