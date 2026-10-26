@@ -19,7 +19,7 @@ function calcularRepartoCamellos() {
   document.getElementById("salidaCamellos").innerHTML = resultadoHTML;
 }
 
-// 2. Ejercicio Panes
+// 2. Ejercicio Panes (Lógica corregida para evitar valores negativos)
 function calcularPagoPanes() {
   var pBeremiz = parseInt(document.getElementById("panesBeremiz").value) || 0;
   var pHank = parseInt(document.getElementById("panesHank").value) || 0;
@@ -27,15 +27,28 @@ function calcularPagoPanes() {
 
   var totalPanes = pBeremiz + pHank;
   var totalTercios = totalPanes * 3;
-  var porcionPorPersona = totalTercios / 3;
+  var porcionPorPersona = totalTercios / 3; // Lo que come cada uno
 
-  var aporteBeremizTercios = (pBeremiz * 3) - porcionPorPersona;
-  var aporteHankTercios = (pHank * 3) - porcionPorPersona;
+  var terciosBeremiz = pBeremiz * 3;
+  var terciosHank = pHank * 3;
 
-  var valorPorTercio = totalMonedas / totalTercios;
+  // Aporte bruto de cada uno respecto a su consumo
+  var aporteBeremiz = terciosBeremiz - porcionPorPersona;
+  var aporteHank = terciosHank - porcionPorPersona;
 
-  var pagoBeremiz = aporteBeremizTercios * valorPorTercio;
-  var pagoHank = aporteHankTercios * valorPorTercio;
+  // Si alguien aportó menos de su consumo, su aporte real para el invitado es 0
+  var aporteRealBeremiz = Math.max(0, aporteBeremiz);
+  var aporteRealHank = Math.max(0, aporteHank);
+
+  var sumaAportesReales = aporteRealBeremiz + aporteRealHank;
+
+  var pagoBeremiz = 0;
+  var pagoHank = 0;
+
+  if (sumaAportesReales > 0) {
+    pagoBeremiz = (aporteRealBeremiz / sumaAportesReales) * totalMonedas;
+    pagoHank = (aporteRealHank / sumaAportesReales) * totalMonedas;
+  }
 
   var resultadoHTML = "<strong>Distribución y pago (" + totalMonedas + " monedas):</strong><br>" +
     "• Total panes: " + totalPanes + " (" + totalTercios + " tercios)<br>" +
@@ -63,13 +76,14 @@ function resolverCuadratica() {
     let x = -b / (2 * a);
     textoResultado = "One root:\nx = " + x.toFixed(4);
   } else {
+    textoResultados = "The equation has no real roots.";
     textoResultado = "The equation has no real roots.";
   }
 
   document.getElementById('resultadoCuadratica').innerText = textoResultado;
 }
 
-// 4. Ejercicio Pi (Actualizado para cualquier valor de n ingresado)
+// 4. Ejercicio Pi
 function calcularPi() {
   let n = parseInt(document.getElementById("inputNPi").value);
 
